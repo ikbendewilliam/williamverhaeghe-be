@@ -15,7 +15,7 @@ class Button extends StatelessWidget {
     required this.color,
   }) : super(key: key);
 
-  void _launch() => launch(url, webOnlyWindowName: '_blank');
+  void _launch() => launch(url, webOnlyWindowName: url.startsWith('http') ? '_blank' : null);
 
   @override
   Widget build(BuildContext context) {

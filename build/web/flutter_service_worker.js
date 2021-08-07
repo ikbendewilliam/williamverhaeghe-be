@@ -9,7 +9,7 @@ const RESOURCES = {
 "assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/NOTICES": "5b7da7eceb6ad4eeacb350ed34437fbc",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"favicon.png": "f90af6d99dbb43a953c7e71346d1b221",
 "icons/android-icon-144x144.png": "f54f5b1857ae3a853ef12dd56ddae136",
 "icons/android-icon-192x192.png": "d34b7ef1e40db163311fbc2a382fc3df",
 "icons/android-icon-36x36.png": "7a3ed1f897481c3cc0c8eecfa62ae567",
@@ -37,10 +37,10 @@ const RESOURCES = {
 "icons/ms-icon-150x150.png": "4f83677a34e53cd96c37ebb5172e7c74",
 "icons/ms-icon-310x310.png": "37096c63b04885cf9742fdec9966359e",
 "icons/ms-icon-70x70.png": "95209261ef3b3c216eca8677c9652157",
-"index.html": "980317d822504e032904f5f229052077",
-"/": "980317d822504e032904f5f229052077",
-"main.dart.js": "365a104ef5ef1173516a4efc58286a02",
-"manifest.json": "2b9163bc3f7be906cf70a42030a0197f",
+"index.html": "3effb30365162938b8fd137d16b52bee",
+"/": "3effb30365162938b8fd137d16b52bee",
+"main.dart.js": "5a486ab8b16bf547d5cd7867b04969fe",
+"manifest.json": "3c73dfa6b668b5bb069b5ea9118b9f49",
 "version.json": "6093cc13ea18d9423c9b1d1416aef75f"
 };
 
