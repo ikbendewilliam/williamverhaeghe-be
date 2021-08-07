@@ -29,16 +29,6 @@ class IndexScreen extends StatelessWidget {
                       url: 'https://www.linkedin.com/in/william-verhaeghe/',
                       color: Colors.red,
                     ),
-                    Button(
-                      text: 'icapps',
-                      url: 'https://icapps.com/',
-                      color: Colors.green,
-                    ),
-                    Button(
-                      text: 'Mail',
-                      url: 'mailto:work@williamverhaeghe.be',
-                      color: Colors.yellow[600]!,
-                    ),
                   ],
                 ),
               ),
