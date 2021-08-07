@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:williamverhaeghebe/widgets/home/hover.dart';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
 
 class Button extends StatelessWidget {
   final String url;
@@ -16,7 +15,7 @@ class Button extends StatelessWidget {
     required this.color,
   }) : super(key: key);
 
-  void _launch() => html.window.open(url, 'new tab');
+  void _launch() => launch(url, webOnlyWindowName: '_blank');
 
   @override
   Widget build(BuildContext context) {
