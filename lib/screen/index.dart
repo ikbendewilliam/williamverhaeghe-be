@@ -13,7 +13,10 @@ class IndexScreen extends StatelessWidget {
             Center(
               child: Name(),
             ),
-            Text('Flutter developer @icapps with Mobile game dev and ML on the side'),
+            Text(
+              'Flutter developer @icapps with Mobile game dev and ML on the side',
+              textAlign: TextAlign.center,
+            ),
             SizedBox(height: 8),
             Expanded(
               child: Container(

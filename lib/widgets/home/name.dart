@@ -44,49 +44,49 @@ class _NameState extends State<Name> with SingleTickerProviderStateMixin {
           TextSpan(
             text: 'W',
             style: TextStyle(
-              fontSize: 128,
+              fontSize: 96,
               color: _colorAnim!.value ?? Colors.white,
             ),
           ),
           TextSpan(
             text: 'I',
             style: TextStyle(
-              fontSize: 96,
+              fontSize: 80,
               color: Colors.red,
             ),
           ),
           TextSpan(
             text: 'L',
             style: TextStyle(
-              fontSize: 96,
+              fontSize: 80,
               color: Colors.yellow[600],
             ),
           ),
           TextSpan(
             text: 'L',
             style: TextStyle(
-              fontSize: 96,
+              fontSize: 80,
               color: Colors.blue[600],
             ),
           ),
           TextSpan(
             text: 'I',
             style: TextStyle(
-              fontSize: 96,
+              fontSize: 80,
               color: Colors.green,
             ),
           ),
           TextSpan(
             text: 'A',
             style: TextStyle(
-              fontSize: 96,
+              fontSize: 80,
               color: Colors.red,
             ),
           ),
           TextSpan(
             text: 'M',
             style: TextStyle(
-              fontSize: 96,
+              fontSize: 80,
               color: Colors.yellow[600],
             ),
           ),
