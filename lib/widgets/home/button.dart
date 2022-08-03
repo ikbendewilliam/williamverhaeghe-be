@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:williamverhaeghebe/widgets/home/hover.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
+
+import 'package:flutter/material.dart';
+import 'package:seo_renderer/seo_renderer.dart';
+import 'package:williamverhaeghebe/widgets/home/hover.dart';
 
 class Button extends StatelessWidget {
   final String url;
@@ -22,27 +23,31 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.all(4),
-        child: SizedBox(
-          width: 256,
-          child: Hover(
-            child: GestureDetector(
-              onTap: _launch,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    text,
-                    style: TextStyle(color: Colors.white),
+      child: LinkRenderer(
+        text: text,
+        href: url,
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: SizedBox(
+            width: 256,
+            child: Hover(
+              child: GestureDetector(
+                onTap: _launch,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      text,
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ),
+              color: color,
+              hoverColor: Colors.black,
+              borderRadius: 0,
+              hoverBorderRadius: 16,
             ),
-            color: color,
-            hoverColor: Colors.black,
-            borderRadius: 0,
-            hoverBorderRadius: 16,
           ),
         ),
       ),

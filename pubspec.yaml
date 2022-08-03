@@ -11,6 +11,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^6.0.9
   rainbow_color: ^2.0.1
+  seo_renderer: ^0.6.0
   url_strategy: ^0.2.0
 
 dev_dependencies:
