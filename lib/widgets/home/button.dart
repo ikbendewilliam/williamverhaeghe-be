@@ -3,6 +3,7 @@ import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
 import 'package:seo_renderer/seo_renderer.dart';
+// import 'package:seo_renderer/seo_renderer.dart';
 import 'package:williamverhaeghebe/widgets/home/hover.dart';
 
 class Button extends StatelessWidget {
