@@ -1,97 +1,109 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:rainbow_color/rainbow_color.dart';
+import 'package:path_morph/path_morph.dart';
+import 'package:williamverhaeghebe/model/svg_paths.dart';
 
 class Name extends StatefulWidget {
+  final double height;
+
+  const Name({
+    this.height = 150,
+    super.key,
+  });
+
   @override
-  _NameState createState() => _NameState();
+  NameState createState() => NameState();
 }
 
-class _NameState extends State<Name> with SingleTickerProviderStateMixin {
-  AnimationController? controller;
-  Animation<Color?>? _colorAnim;
+class NameState extends State<Name> with TickerProviderStateMixin {
+  late final _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+  late final _williamPath = SvgPaths.william;
+  late final _flutterPath = SvgPaths.flutter;
+  late final _williamBounds = _williamPath.getBounds();
+  late final _flutterBounds = _flutterPath.getBounds();
+  late final _maxWidth = max(_williamBounds.width, _flutterBounds.width);
+  late final _maxHeight = max(_williamBounds.height, _flutterBounds.height);
+  final colorsWilliam = [
+    Colors.red,
+    Colors.yellow,
+    Colors.green,
+    Colors.cyan,
+    Colors.amber,
+    Colors.pinkAccent,
+    Colors.lime,
+    Colors.indigo,
+    Colors.black,
+    Colors.purple,
+    Colors.orange,
+    Colors.teal,
+  ];
+  var colorWilliam = 0;
+  final colorFlutter = Colors.blue;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(duration: const Duration(seconds: 10), vsync: this);
-    _colorAnim = RainbowColorTween([
-      Colors.blue,
-      Colors.green,
-      Colors.yellow,
-      Colors.red,
-      Colors.blue,
-    ]).animate(controller!)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          controller
-            ?..reset()
-            ..forward();
-        } else if (status == AnimationStatus.dismissed) {
-          controller?.forward();
-        }
-      });
-    controller?.forward();
+    _controller.addStatusListener(_onControllerStatusChanged);
+    _controller.forward();
+  }
+
+  void _onControllerStatusChanged(AnimationStatus status) async {
+    if (status == AnimationStatus.completed) {
+      colorWilliam = (colorWilliam + 1) % colorsWilliam.length;
+      await Future<void>.delayed(const Duration(seconds: 3));
+      await _controller.reverse();
+    } else if (status == AnimationStatus.dismissed) {
+      await Future<void>.delayed(const Duration(seconds: 3));
+      await _controller.forward();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            text: 'W',
-            style: TextStyle(
-              fontSize: 96,
-              color: _colorAnim!.value ?? Colors.white,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final scaleW = constraints.maxWidth / _maxWidth / 1.5;
+        final scaleH = widget.height / _maxHeight / 2;
+        final scale = min(scaleW, scaleH);
+        final williamMatrix = Matrix4.identity()
+          ..scale(scale, scale, scale)
+          ..translate(-_williamBounds.width / 2, _williamBounds.height, 0);
+        final flutterMatrix = Matrix4.identity()
+          ..scale(scale, scale, scale)
+          ..translate(-_flutterBounds.width / 2, _flutterBounds.height, 0);
+        final williamPath = Path.from(_williamPath).transform(williamMatrix.storage);
+        final flutterPath = Path.from(_flutterPath).transform(flutterMatrix.storage);
+        return Center(
+          child: SizedBox(
+            height: widget.height,
+            child: MorphWidget(
+              path1: williamPath,
+              path2: flutterPath,
+              controller: _controller,
+              painter: (p0) => MorphPainter(
+                p0,
+                Paint()
+                  ..style = PaintingStyle.fill
+                  ..color = Color.lerp(colorsWilliam[colorWilliam], colorFlutter, _controller.value) ?? Colors.white,
+              ),
             ),
           ),
-          TextSpan(
-            text: 'I',
-            style: TextStyle(
-              fontSize: 80,
-              color: Colors.red,
-            ),
-          ),
-          TextSpan(
-            text: 'L',
-            style: TextStyle(
-              fontSize: 80,
-              color: Colors.yellow[600],
-            ),
-          ),
-          TextSpan(
-            text: 'L',
-            style: TextStyle(
-              fontSize: 80,
-              color: Colors.blue[600],
-            ),
-          ),
-          TextSpan(
-            text: 'I',
-            style: TextStyle(
-              fontSize: 80,
-              color: Colors.green,
-            ),
-          ),
-          TextSpan(
-            text: 'A',
-            style: TextStyle(
-              fontSize: 80,
-              color: Colors.red,
-            ),
-          ),
-          TextSpan(
-            text: 'M',
-            style: TextStyle(
-              fontSize: 80,
-              color: Colors.yellow[600],
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
+}
+
+class MorphPainter extends CustomPainter {
+  final Path _path;
+  final Paint _paint;
+
+  MorphPainter(this._path, this._paint);
+
+  @override
+  void paint(Canvas canvas, Size size) => canvas.drawPath(_path, _paint);
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }

@@ -7,7 +7,7 @@ class Hover extends StatefulWidget {
   final double? borderRadius;
   final double? hoverBorderRadius;
 
-  Hover({
+  const Hover({
     Key? key,
     this.child,
     this.color,
@@ -17,10 +17,10 @@ class Hover extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _HoverState createState() => _HoverState();
+  HoverState createState() => HoverState();
 }
 
-class _HoverState extends State<Hover> {
+class HoverState extends State<Hover> {
   final nonHoverTransform = Matrix4.identity()..translate(0, 0, 0);
   final hoverTransform = Matrix4.identity()..translate(0, -10, 0);
 
@@ -33,13 +33,13 @@ class _HoverState extends State<Hover> {
       onExit: (e) => _mouseEnter(false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        child: widget.child,
         decoration: BoxDecoration(
           color: _hovering ? widget.hoverColor : widget.color,
           borderRadius: BorderRadius.circular(
             (_hovering ? widget.hoverBorderRadius : widget.borderRadius) ?? 0,
           ),
         ),
+        child: widget.child,
       ),
     );
   }

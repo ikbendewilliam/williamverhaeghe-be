@@ -37,10 +37,6 @@
 
 <body>
   <script>
-    const regExp = new RegExp("bot|google|baidu|bing|msn|teoma|slurp|yandex", "i");
-    if (regExp.test(navigator.userAgent)) {
-      window.flutterWebRenderer = "html";
-    }
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
     function loadMainDartJs() {
